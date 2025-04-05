@@ -13,17 +13,17 @@ const mongoose = require('mongoose')
 // }, {"strict": "throw"});
 
 const articleSchema = new mongoose.Schema({
-    title: { type: String },
-    description: { type: String },
-    category: { type: String, enum: ["cultural", "academic", "sports", "other"] },
-    location: { type: String },
-    start_time: { type: String },
-    end_time: { type: String },
-    ticket_type: { type: String, enum: ["free", "paid"], default: "free" },
-    ticket_price: { type: Number, default: 0 },
-    participant_limit: {type: Number},
-    participant_count: { type: Number, default: 0 },
-    registered_emails: {type: [String]},
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    category: { type: String, enum: ["cultural", "academic", "sports", "other"], required: true },
+    location: { type: String, required: true },
+    start_time: { type: String, required: true },
+    end_time: { type: String, required: true },
+    ticket_type: { type: String, enum: ["free", "paid"], default: "free", required: true },
+    ticket_price: { type: Number, default: 0, required: true },
+    participant_limit: {type: Number, required: true},
+    participant_count: { type: Number, default: 0, required: true },
+    registered_emails: {type: [String], required: true},
     created_at: { type: String },
     isArticleActive: {type: Boolean, default: true}
   });
