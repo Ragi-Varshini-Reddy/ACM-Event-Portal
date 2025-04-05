@@ -15,31 +15,47 @@ function Articles() {
   const {getToken} = useAuth()
 
   // Get all articles
-  async function getArticles(){
-    // Get jwt token
-    const token = await getToken()
+  // async function getArticles(){
+  //   // Get jwt token
+  //   const token = await getToken();
 
-    // Make authenticated request
-    let res = await axios.get('http://localhost:3000/author-api/articles', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    if(res.data.message === 'articles'){
-      setArticles(res.data.payload)
-      setFilteredArticles(res.data.payload)
-      const uniqueCategories = [
-        "All", ...new Set(res.data.payload.map((article) => article.category))
-      ]
-      setCategories(uniqueCategories)
-    } else {
-      setError(res.data.message)
-    }
-  }
+  //   // Make authenticated request
+  //   let res = await axios.get('http://localhost:3000/author-api/articles', {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   })
+  //   console.log(res.data.payload)
+  //   if(res.data.message === 'articles'){
+  //     setArticles(res.data.payload)
+  //     setFilteredArticles(res.data.payload)
+  //     const uniqueCategories = [
+  //       "All", ...new Set(res.data.payload.map((article) => article.category))
+  //     ]
+  //     setCategories(uniqueCategories)
+  //   } else {
+  //     setError(res.data.message)
+  //   }
+  // }
    
+  async function getArticles(){
+    try {
+      const token = await getToken();
+      const res = await axios.get('http://localhost:3000/author-api/articles', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      console.log("Response:", res.data);
+      setArticles(res.data.payload);
+      setFilteredArticles(res.data.payload);
+    } catch (err) {
+      console.error("Error fetching articles:", err);
+      setError("Failed to fetch articles");
+    }
+  }  
+
   //Go to specific article
   function goToArticleById(articleObj){
-    navigate(`../${articleObj.articleId}`, {state: articleObj})
+    navigate(`../${articleObj.title}`, {state: articleObj})
   }
 
   // Handle category filtering
@@ -84,26 +100,26 @@ function Articles() {
         <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3'>
           {
             filteredArticles.map((articleObj) => 
-              <div className="col mb-4" key = {articleObj.articleId}>
+              <div className="col mb-4" key = {articleObj.title}>
                 <div className="card h-100">
                   <div className="cardbody">
-                    <div className="author-details text-end">
+                    {/* <div className="author-details text-end">
                       <img src={articleObj.authorData.profileImageUrl}  className = "rounded-circle" width = "40px" alt="" />
                       <p>
                         <small className="text-secondary">
                           {articleObj.authorData.nameOfAuthor}
                         </small>
                       </p>
-                    </div>
+                    </div> */}
                     <h5 className='card-title'>{articleObj.title}</h5>
-                    <p className='card-text'> {articleObj.content.substring(0, 80) + "...."} </p>
+                    <p className='card-text'> {articleObj.description + "...."} </p>
                     <button className='btn-4 custom-btn' onClick={() => goToArticleById(articleObj)}>
                       Read more
                     </button>
                   </div>
                   <div className="card-footer">
                     <small>
-                      Last updated on {articleObj.dateOfModification}
+                      Last updated on {articleObj.created_at}
                     </small>
                   </div>
                 </div>

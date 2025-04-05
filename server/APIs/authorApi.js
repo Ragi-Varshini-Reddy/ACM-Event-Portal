@@ -17,7 +17,7 @@ authorApp.post("/article", expressAsyncHandler(async(req, res) => {
     const newArticleObj = req.body;
     const newArticle = new Article(newArticleObj);
     const newArticleObjDoc = await newArticle.save()
-    res.status(201).send({message: "Article published", payload: newArticleObjDoc})
+    res.status(201).send({message: "event published", payload: newArticleObjDoc})
 }))
 
 // To read all articles
