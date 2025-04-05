@@ -1,0 +1,48 @@
+Color Palette
+:root {
+    --primary-color: #0a192f;
+    --secondary-color: #f4a261;
+    --accent-color: #2a9d8f;
+    --text-color: #ffffff;
+    --nav-bg: #1e293b;
+}
+
+.author-profile {
+    font-family: "Poppins", sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.nav-bar {
+    background-color: var(--nav-bg);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 30px;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.active {
+    background-color: var(--secondary-color);
+    color: #0a192f;
+    font-weight: bold;
+}
+

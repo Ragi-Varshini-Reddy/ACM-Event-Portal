@@ -1,0 +1,266 @@
+/* 
+.header-container {
+  width: 100%;
+  background: #1E2A38;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 20px;
+}
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.nav-link {
+  font-size: 1rem;
+  margin-left: 20px;
+  color: #F4F5F7 !important;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #CBA135;
+  object-fit: cover;
+}
+
+.role {
+  position: absolute;
+  bottom: 34px;
+  right: 10px;
+  background: #2C786C;
+  color: white;
+  font-weight: 600;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+  border: 2px solid #F4F5F7;
+}
+
+.user-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.btn-danger {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #B22222;
+  border: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-danger:hover {
+  background: #CBA135;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+  }
+
+  .user-button {
+      flex-direction: column;
+      align-items: center;
+  }
+} */
+
+/* ---- HEADER CONTAINER ---- */
+.header-container {
+  width: 100%;
+  background: #1E2A38;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 20px;
+}
+
+/* ---- NAVBAR ---- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.logo {
+  color: #CBA135;
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* ---- NAVBAR NAV ---- */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.navbar-nav.show {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  background: #1E2A38;
+  border-radius: 10px;
+  padding: 15px;
+  z-index: 10;
+}
+
+/* ---- NAV LINKS ---- */
+.nav-link {
+  font-size: 1rem;
+  margin: 0 15px;
+  color: #F4F5F7 !important;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #CBA135;
+}
+
+/* ---- MENU TOGGLE (For Mobile) ---- */
+.menu-toggle {
+  display: none;
+  color: #CBA135;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+}
+
+/* ---- USER SECTION ---- */
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 2px solid #CBA135;
+  object-fit: cover;
+}
+
+.role {
+  position: absolute;
+  bottom: 34px;
+  right: 10px;
+  background: #2C786C;
+  color: white;
+  font-weight: 600;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+  border: 2px solid #F4F5F7;
+}
+
+.user-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* ---- SIGNOUT BUTTON ---- */
+.btn-danger {
+  padding: 6px 14px;
+  border-radius: 20px;
+  background: #B22222;
+  border: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-danger:hover {
+  background: #CBA135;
+}
+
+/* ---- MEDIA QUERY FOR SMALL SCREENS ---- */
+@media (max-width: 992px) {  /* Changed from 950px to 992px */
+  .menu-toggle {
+    display: block; /* Show the hamburger menu */
+  }
+
+  .navbar-nav {
+    display: none; /* Hide normal menu */
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-button {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+
+
+
+/* Banner Image Styling */
+.banner-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Welcome Section Styling */
+.welcome-section {
+    padding: 40px 0;
+}
+
+.welcome-section h1 {
+    font-size: 2.8rem;
+}
+
+.welcome-section p {
+    max-width: 600px;
+}
+
+.welcome-section .btn {
+    transition: all 0.3s ease-in-out;
+    padding: 10px 30px;
+}
+
+.welcome-section .btn:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) { /* Tablet and smaller */
+    .welcome-section .row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile devices */
+    .welcome-section h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section h1 {
+        font-size: 1.8rem;
+    }
+    .form-check-label {
+        font-size: 1rem;
+    }
+}
