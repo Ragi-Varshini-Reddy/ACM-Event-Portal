@@ -162,7 +162,7 @@ function Header() {
   return (
     <header className="header-container">
       <nav className="navbar navbar-expand-lg">
-        <Link to="/" className="logo">Inksprie</Link>
+        <Link to="/" className="logo">Sanvaya</Link>
         <button className="menu-toggle" onClick={toggleMenu}>
           &#9776; 
         </button>

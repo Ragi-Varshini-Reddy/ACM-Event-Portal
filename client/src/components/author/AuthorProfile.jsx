@@ -8,10 +8,10 @@ function AuthorProfile() {
       <nav className="nav-bar">
         <ul className='nav-list'>
         <li>
-          <NavLink to = "articles" className="nav-link">Articles</NavLink>
+          <NavLink to = "articles" className="nav-link">Events</NavLink>
         </li>
         <li>
-          <NavLink to = "article" className="nav-link">Add New Article</NavLink>
+          <NavLink to = "article" className="nav-link">Add New Event</NavLink>
         </li>
         </ul>
       </nav>
