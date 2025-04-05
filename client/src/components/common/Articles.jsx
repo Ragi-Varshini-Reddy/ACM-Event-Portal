@@ -117,11 +117,6 @@ function Articles() {
                       Read more
                     </button>
                   </div>
-                  <div className="card-footer">
-                    <small>
-                      Last updated on {articleObj.created_at}
-                    </small>
-                  </div>
                 </div>
               </div>
             )

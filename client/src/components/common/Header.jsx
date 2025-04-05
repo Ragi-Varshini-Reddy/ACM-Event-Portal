@@ -182,9 +182,9 @@ function Header() {
                   className="user-img"
                   alt="User"
                 />
-                <span className="role">{currentUser?.role}</span>
+                <span className="role">{currentUser?.role === "author" ? "organizer" : "student"}</span>
               </div>
-              <p className="mb-0 user-name">{user.firstName}</p>
+              <p className="mb-0 user-name">{user.firstName + " " + user.lastName}</p>
               <button className="btn btn-danger ms-3" onClick={handleSignOut}>
                 Sign Out
               </button>
