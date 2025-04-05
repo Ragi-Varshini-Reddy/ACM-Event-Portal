@@ -1,5 +1,5 @@
 
-### create author
+### create organizer
 POST http://localhost:3000/author-api/author
 Content-Type: application/json
 
@@ -12,7 +12,7 @@ Content-Type: application/json
   "isActive": true
 }
 
-###create user
+###create student
 POST http://localhost:3000/user-api/user
 Content-Type: application/json
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 
-###post new article
+###post new event by organizor
 POST http://localhost:3000/author-api/article
 Content-Type: application/json
 
@@ -47,15 +47,30 @@ Content-Type: application/json
    
 }
 
-### Read all articles by user
+###register event by student
+POST http://localhost:3000/user-api/register
+Content-Type: application/json
+
+{
+  "event_name": "Sintillashunz",
+  "roll_no": "23071A0547",
+  "full_name": "Pranati Rao Pinisetti",
+  "email": "pranatiraop@gmail.com",
+  "branch": "Computer Science",
+  "section": "A",
+  "gender": "Female",
+  "phone_number": "9032017652"  
+}
+
+### Read all events by student
 GET http://localhost:3000/user-api/articles
 
 
-### Read all articles by author
+### Read all articles by organizer
 GET http://localhost:3000/author-api/articles
 
 
-### edit article by id
+### edit event by title
 PUT http://localhost:3000/author-api/article/1740127871
 Content-Type: application/json
 
@@ -75,18 +90,7 @@ Content-Type: application/json
     "isArticleActive": true
 }
 
-### post comment by article id
-PUT http://localhost:3000/user-api/comment/1740127871
-Content-Type: application/json
-
-{
-      "nameOfUser": "user1",
-      "comment": "Best article!"
-     
-}
-
-### delete atricle by article id
-### To do soft delete we are just updating the isArticleActive status to false
+### delete event by event title
 PUT http://localhost:3000/author-api/articles/1740126354
 Content-Type: application/json
 

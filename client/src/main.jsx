@@ -18,6 +18,7 @@ import RegisteredEvents from './components/user/RegisteredEvents.jsx'
 import UpcomingEvents from './components/user/UpcomingEvents.jsx'
 import PastEvents from './components/user/PastEvents.jsx'
 import CalendarPage from './components/calendar/CalendarPage.jsx'
+import RegisterUser from './components/user/RegisterUser.jsx'
 
 const browserRouterObj = createBrowserRouter([
   {
@@ -61,9 +62,13 @@ const browserRouterObj = createBrowserRouter([
             element: <CalendarPage />
           },
           {
+            path: "register",
+            element: <RegisterUser />
+          },
+          {
             path: "",
             element: <RegisteredEvents />
-          }
+          },
         ]
       },
       {

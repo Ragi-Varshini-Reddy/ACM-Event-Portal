@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  full_name: {
+    event_name: {
+        type: String,
+        required: true
+  },
+    roll_no: {
+    type: String,
+    required: true
+  },
+    full_name: {
     type: String,
     required: true,
     trim: true
