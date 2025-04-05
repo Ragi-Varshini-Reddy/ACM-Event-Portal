@@ -41,6 +41,10 @@ const browserRouterObj = createBrowserRouter([
         element: <UserProfile/>,
         children: [
           {
+            path: "articles",
+            element: <Articles />
+          },
+          {
             path: "past-events",
             element: <PastEvents />
           },

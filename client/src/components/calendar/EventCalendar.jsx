@@ -1,174 +1,129 @@
-// import React, { useMemo, useState } from 'react';
-// import { Calendar, momentLocalizer } from 'react-big-calendar';
-// import moment from 'moment';
-// import 'react-big-calendar/lib/css/react-big-calendar.css';
-
-// const localizer = momentLocalizer(moment);
-
-// const allEvents = [
-//   {
-//     title: 'Tech Talk',
-//     start: new Date('2025-04-03T10:00:00'),
-//     end: new Date('2025-04-03T12:00:00'),
-//     type: 'past'
-//   },
-//   {
-//     title: 'Hackathon',
-//     start: new Date('2025-04-07T09:00:00'),
-//     end: new Date('2025-04-08T18:00:00'),
-//     type: 'registered'
-//   },
-//   {
-//     title: 'Alumni Meet',
-//     start: new Date('2025-03-20T10:00:00'),
-//     end: new Date('2025-03-20T14:00:00'),
-//     type: 'upcoming'
-//   }
-// ];
-
-// function EventCalendar({ filter }) {
-//   const now = new Date();
-//   const [date, setDate] = useState(now); // Controls the current visible month
-
-//   const filteredEvents = useMemo(() => {
-//     if (filter === 'past') return allEvents.filter(e => e.end < now);
-//     if (filter === 'upcoming') return allEvents.filter(e => e.start > now);
-//     if (filter === 'ongoing') return allEvents.filter(e => e.start <= now && e.end >= now);
-//     return allEvents;
-//   }, [filter]);
-
-//   const eventColors = {
-//     past: '#d9534f',       // red
-//     upcoming: '#5bc0de',   // blue
-//     registered: '#5cb85c'  // green
-//   };
-
-//   const eventPropGetter = (event) => {
-//     const backgroundColor = eventColors[event.type] || '#888';
-//     return {
-//       style: {
-//         backgroundColor,
-//         borderRadius: '6px',
-//         padding: '4px',
-//         color: 'white',
-//         border: 'none'
-//       }
-//     };
-//   };
-
-//   return (
-//     <div className="container mt-4 shadow p-3 bg-white rounded">
-//       <Calendar
-//         localizer={localizer}
-//         events={filteredEvents}
-//         startAccessor="start"
-//         endAccessor="end"
-//         style={{ height: 600 }}
-//         eventPropGetter={eventPropGetter}
-//         views={['month']}           // Only month view
-//         defaultView="month"
-//         date={date}                 // Controlled view date
-//         onNavigate={(newDate) => setDate(newDate)} // Allow navigation
-//         toolbar={true}
-//       />
-//     </div>
-//   );
-// }
-
-// export default EventCalendar;
-
-
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 
-// Example data matching the schema you shared (replace with real DB data)
-const allEvents = [
-  {
-    title: 'Tech Talk',
-    start_time: '2025-04-03T10:00:00',
-    end_time: '2025-04-03T12:00:00',
-    isEventActive: false,
-    ticket_type: 'free',
-  },
-  {
-    title: 'Hackathon',
-    start_time: '2025-04-07T09:00:00',
-    end_time: '2025-04-08T18:00:00',
-    isEventActive: true,
-    ticket_type: 'paid',
-  },
-  {
-    title: 'Alumni Meet',
-    start_time: '2025-03-20T10:00:00',
-    end_time: '2025-03-20T14:00:00',
-    isEventActive: true,
-    ticket_type: 'free',
-  }
-];
-
 function EventCalendar({ filter }) {
   const now = new Date();
   const [date, setDate] = useState(now);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Convert schema event data into Calendar-compatible format
-  const mappedEvents = allEvents.map(event => ({
-    title: event.title,
-    start: new Date(event.start_time),
-    end: new Date(event.end_time),
-    ticketType: event.ticket_type,
-    isActive: event.isEventActive,
-  }));
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/user-api/articles');
+        const contentType = response.headers.get('content-type');
+
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('API did not return JSON');
+        }
+
+        const data = await response.json();
+        const rawEvents = Array.isArray(data)
+          ? data
+          : Array.isArray(data.payload)
+          ? data.payload
+          : [];
+
+        const mapped = rawEvents
+          .map(event => {
+            if (!event.start_time || !event.end_time || !event.title) return null;
+
+            const start = moment(event.start_time);
+            const end = moment(event.end_time);
+
+            if (!start.isValid() || !end.isValid()) return null;
+
+            return {
+              title: event.title,
+              start: start.toDate(),
+              end: end.toDate(),
+              ticketType: event.ticket_type || 'free',
+              isActive: event.isEventActive ?? true,
+            };
+          })
+          .filter(Boolean);
+
+        setEvents(mapped);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+        setEvents([]); // no fallback event either
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const filteredEvents = useMemo(() => {
-    return mappedEvents.filter(event => {
+    const now = new Date();
+    return events.filter(event => {
       if (filter === 'past') return event.end < now;
       if (filter === 'upcoming') return event.start > now;
       if (filter === 'ongoing') return event.start <= now && event.end >= now;
-      return true; // show all
+      return true;
     });
-  }, [filter, mappedEvents]);
+  }, [filter, events]);
 
   const eventPropGetter = (event) => {
+    const now = new Date();
     let backgroundColor = '#888';
+    let fontWeight = 'normal';
 
     if (!event.isActive) {
-      backgroundColor = '#aaa'; // grey for inactive
+      backgroundColor = '#aaa';
+    } else if (event.start <= now && event.end >= now) {
+      backgroundColor = 'green';
+      fontWeight = 'bold';
+    } else if (event.end < now) {
+      backgroundColor = '#bbb';
     } else if (event.ticketType === 'free') {
-      backgroundColor = '#5cb85c'; // green
+      backgroundColor = '#5cb85c';
     } else if (event.ticketType === 'paid') {
-      backgroundColor = '#5bc0de'; // blue
+      backgroundColor = '#5bc0de';
     }
 
     return {
       style: {
         backgroundColor,
         borderRadius: '6px',
-        padding: '4px',
+        padding: '6px',
         color: 'white',
-        border: 'none'
+        border: '1px solid #333',
+        fontWeight,
+        height: '100%',
       }
     };
   };
 
+  if (loading) return <div className="text-center mt-5">Loading events...</div>;
+
   return (
     <div className="container mt-4 shadow p-3 bg-white rounded">
-      <Calendar
-        localizer={localizer}
-        events={filteredEvents}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 600 }}
-        eventPropGetter={eventPropGetter}
-        views={['month']}
-        defaultView="month"
-        date={date}
-        onNavigate={(newDate) => setDate(newDate)}
-        toolbar={true}
-      />
+      {filteredEvents.length === 0 ? (
+        <div className="text-center my-4 text-dark">
+          No {filter ? filter : ''} events available.
+        </div>
+      ) : (
+        <Calendar
+          localizer={localizer}
+          events={filteredEvents}
+          startAccessor="start"
+          endAccessor="end"
+          titleAccessor={(event) => `${event.title} (${event.ticketType})`}
+          style={{ height: 600 }}
+          eventPropGetter={eventPropGetter}
+          views={['month']}
+          defaultView="month"
+          date={date}
+          onNavigate={(newDate) => setDate(newDate)}
+          toolbar={true}
+        />
+      )}
     </div>
   );
 }

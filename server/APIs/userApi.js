@@ -21,6 +21,12 @@ userApp.put('/comment/:articleId', expressAsyncHandler(async(req, res) => {
     res.status(200).send({message: "Comment added", paylaod: articleWithComments})
 }))
 
+userApp.get("/articles", expressAsyncHandler(async(req, res) => {
+    // read all articles from db
+    const listOfArticles = await Article.find({isArticleActive: true});
+    res.status(200).send({message: "articles", payload: listOfArticles})
+}))
+
 // Fetch all users
 userApp.get("/users", expressAsyncHandler(async (req, res) => {
     try {
