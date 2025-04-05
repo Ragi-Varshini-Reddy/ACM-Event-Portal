@@ -104,8 +104,8 @@ function ArticlesByID() {
               <div className="author-block">
                 <p className='article-title'>{state.title}</p>
                 <span className='article-meta'>
-                  <small>Start Date: {state.start_time}</small>
-                  <small>End Date: {state.end_time}</small>
+                  <p className='me-5'>Start Date: {state.start_time}</p>
+                  <p>End Date: {state.end_time}</p>
                 </span>
               </div>
               {/* <div className='author-details text-center'>
