@@ -14,7 +14,10 @@ import ArticlesByID from './components/common/ArticlesByID.jsx'
 import PostArticle from './components/author/PostArticle.jsx'
 import UserAuthorContext from './contexts/UserAuthorContext.jsx'
 import AdminProfile from './components/admin/AdminProfile.jsx'
-
+import RegisteredEvents from './components/user/RegisteredEvents.jsx'
+import UpcomingEvents from './components/user/UpcomingEvents.jsx'
+import PastEvents from './components/user/PastEvents.jsx'
+import CalendarPage from './components/calendar/CalendarPage.jsx'
 
 const browserRouterObj = createBrowserRouter([
   {
@@ -38,16 +41,24 @@ const browserRouterObj = createBrowserRouter([
         element: <UserProfile/>,
         children: [
           {
-            path: "articles",
-            element: <Articles/>
+            path: "past-events",
+            element: <PastEvents />
           },
           {
-            path: ":articleId",
-            element: <ArticlesByID/>
+            path: "registered-events",
+            element: <RegisteredEvents />
+          },
+          {
+            path: "upcoming-events",
+            element: <UpcomingEvents />
+          },
+          {
+            path: "calendar",
+            element: <CalendarPage />
           },
           {
             path: "",
-            element: <Navigate to = "articles" />
+            element: <RegisteredEvents />
           }
         ]
       },

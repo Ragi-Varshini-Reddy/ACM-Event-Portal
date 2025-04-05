@@ -1,0 +1,95 @@
+/* calendar.css continued */
+.calendar-page {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  /* Fix for calendar layout */
+.rbc-calendar {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+    border-radius: 12px;
+    padding: 10px;
+    overflow: hidden;
+  }
+  
+  .rbc-toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  
+  /* Date numbers inside calendar cells */
+.rbc-date-cell {
+    color: #000 !important;  /* Force black text for visibility */
+    font-weight: 500;
+    padding: 4px;
+  }
+  
+  /* Better styling for the calendar */
+.rbc-month-view {
+    background-color: #fff;
+  }
+  
+  .rbc-day-bg {
+    border: 1px solid #e0e0e0;
+  }
+  .rbc-today {
+    background-color: #eaf4ff !important;
+    border: 2px solid #007bff;
+  }
+  
+  
+  /* Optional: better event visuals */
+  .rbc-event {
+    border: none;
+    padding: 2px 6px;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  .rbc-btn-group button {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-right: 5px;
+  }
+  
+  .rbc-btn-group button:hover {
+    background-color: #dee2e6;
+  }
+  
+  .rbc-active {
+    background-color: #007bff !important;
+    color: white !important;
+  }
+  
+/* Make all tab labels black */
+.filter-tab-link {
+    color: black !important;
+  }
+  
+  /* Optional: If you want active tab to also stay black */
+  .filter-tab-link.active {
+    color: black !important;
+    background-color: #e9ecef;
+    font-weight: 600;
+  }
+  .rbc-toolbar button {
+    color: black !important;
+  }
+  
+  .rbc-toolbar-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+  }
