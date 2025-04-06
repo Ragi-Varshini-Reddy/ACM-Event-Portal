@@ -23,7 +23,7 @@ router.post('/send-to-all', async (req, res) => {
       subject: 'New Event Created!',
       text: `A new event has been posted: ${req.body.title || 'Check the platform for details!'}
             This is an automated email, please do not reply.
-            For any queries, contact us at: support@youreventplatform.com`
+            For any queries, contact us at: sanvaya@gmail.com`
     };
 
     await transporter.sendMail(mailOptions);
