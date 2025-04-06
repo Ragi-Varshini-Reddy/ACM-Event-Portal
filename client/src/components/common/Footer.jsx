@@ -1,14 +1,3 @@
-// import React from 'react'
-
-// function Footer() {
-//   return (
-//     <div className='p-5 bg-dark text-white text-center display-4'>Footer</div>
-//   )
-// }
-
-// export default Footer
-
-
 import React from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -27,9 +16,9 @@ function Footer() {
       <div style={{ marginBottom: "20px", maxWidth: "400px" }}>
         <h3>About Us</h3>
         <p style={{ fontSize: "14px", color: "#B0B0B0" }}>
-          We are a platform built for storytellers, thinkers, and innovators. 
-          Whether you're here to share insights or explore new ideas, we provide a 
-          space where voices matter. Join us in shaping a world of creativity and knowledge.
+        Our Event and Organizer Portal streamlines the entire event journey—from creation to participation.
+        Organizers can easily manage events, while users can explore, register, and track upcoming activities.
+        It's a seamless, user-friendly hub for all things events.
         </p>
       </div>
 
@@ -48,7 +37,7 @@ function Footer() {
           </a>
         </div>
         <p style={{ marginTop: "10px", color: "#FFD700" }}>
-          Email: inkspire@gamil.com
+          Email: Sanvaya@gmail.com
         </p>
       </div>
       </div>

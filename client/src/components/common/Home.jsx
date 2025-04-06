@@ -212,41 +212,6 @@ function Home() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Fetch user role after sign-in
-  // useEffect(() => {
-  //   const fetchRole = async () => {
-  //     if (isSignedIn && user) {
-  //       const email = user?.emailAddresses[0].emailAddress;
-
-  //       try {
-  //         const res = await axios.post('http://localhost:3000/checkRole/get-role', { email });
-  //         const { message, payload } = res.data;
-
-  //         if (['user', 'author', 'admin'].includes(message)) {
-  //           const userInfo = {
-  //             ...payload,
-  //             role: message,
-  //             firstName: user?.firstName,
-  //             lastName: user?.lastName,
-  //             email: email,
-  //             profileImageUrl: user?.imageUrl
-  //           };
-
-  //           setCurrentUser(userInfo);
-  //           localStorage.setItem('currentUser', JSON.stringify(userInfo));
-  //         } else {
-  //           navigate('/signup');
-  //         }
-  //       } catch (err) {
-  //         console.error("Role check error:", err);
-  //         navigate('/signup');
-  //       }
-  //     }
-  //   };
-
-  //   fetchRole();
-  // }, [isSignedIn]);
-
   useEffect(() => {
     const fetchOrCreateUser = async () => {
       if (isSignedIn && user) {
@@ -296,7 +261,7 @@ function Home() {
   
             setCurrentUser(userInfo);
             localStorage.setItem('currentUser', JSON.stringify(userInfo));
-            navigate(`/user-profile/${userInfo.email}`); // Adjust as per your routing
+            navigate(`/user-profile/${userInfo.email}`);
           } catch (createErr) {
             console.error("Failed to create user:", createErr);
           }
@@ -332,8 +297,9 @@ function Home() {
               </div>
               <div className="col-lg-6 text-center text-lg-start d-flex flex-column justify-content-center">
                 <h1 className="fw-bold mb-3 text-center">Welcome to Our Community!</h1>
-                <p className="lead mb-3 text-center">Join a platform where <b>authors share their stories</b> and <b>readers explore endless inspiration</b>.</p>
-                <p className="fs-5 mb-4 text-center">Be part of something exciting. Sign up today and start your journey!</p>
+                <p className="lead mb-3 text-center">Step into a world where every idea becomes a celebration.
+                  From buzzing college fests to impactful seminars, our portal connects dreamers, doers, and attendees in one powerful space.
+                  Your next big event starts right here. Be part of something exciting. Sign up today and start your journey!</p>
                 <div className="text-center">
                   <button onClick={() => navigate('/signup')} className="btn btn-lg btn-warning text-dark fw-bold mt-3 px-4">
                     Get Started
