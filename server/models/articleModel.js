@@ -24,7 +24,7 @@ const articleSchema = new mongoose.Schema({
     participant_limit: {type: Number, required: true},
     participant_count: { type: Number, default: 0, required: true },
     registered_emails: {type: [String], required: true},
-    created_at: { type: String },
+    created_at: { type: String }, 
     isArticleActive: {type: Boolean, default: true}
   });
 

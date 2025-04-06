@@ -162,6 +162,18 @@ const PastEvents = () => {
                 <p className="card-text">{event.description}</p>
                 <p className="card-text"><strong>Start:</strong> {new Date(event.start_time).toLocaleString()}</p>
                 <p className="card-text"><strong>End:</strong> {new Date(event.end_time).toLocaleString()}</p>
+                <p className="card-text">
+                  <strong>Location:</strong> {event.location.toLocaleString()}
+                </p>
+                <p className="card-text">
+                  <strong>Ticket Type:</strong> {event.ticket_type.toLocaleString()}
+                </p>
+                <p className="card-text">
+                  <strong>Ticket Price:</strong> {event.ticket_price.toLocaleString()}
+                </p>
+                <p className="card-text">
+                  <strong>Seats left:</strong> {event.participant_limit.toLocaleString()-event.participant_count.toLocaleString()}
+                </p>
               </div>
             </div>
           ))}
