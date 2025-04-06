@@ -19,7 +19,7 @@ function ArticlesByID() {
   const [currentArticle, setCurrentArticle] = useState(state)
   const [commentStatus, setCommentStatus] = useState('')
   const [ticketType, setTicketType] = useState(state.ticket_type || "free");
-
+  
   // Function to change edit ststaus of article
   function enableEdit(){
     setEditArticleStatus(true)
@@ -140,7 +140,29 @@ function ArticlesByID() {
         <p className='me-5'>Participant Limit: <small>{state.participant_limit}</small></p>
       </div>
             <p className="article-content mt-3">{state.description}</p>
-            
+            {currentArticle.registered_emails.length > 0 && (
+  <div className="mt-4">
+    <h5>Registered Users</h5>
+    <table className="table table-bordered table-sm">
+      <thead className="table-light">
+        <tr>
+          <th>#</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {currentArticle.registered_emails.map((email, idx) => (
+          <tr key={idx}>
+            <td>{idx + 1}</td>
+            <td>{email}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+
           </>
         ) : (
 <form 
@@ -447,6 +469,7 @@ function ArticlesByID() {
   </div>
 </form>      
         )
+        
       }
     </div>
   );
