@@ -1,152 +1,4 @@
-// import { useState } from 'react';
-// import axios from 'axios';
 
-// function RegisterUser() {
-//   const [formData, setFormData] = useState({
-//     roll_no: '',
-//     full_name: '',
-//     email: '',
-//     branch: '',
-//     section: '',
-//     gender: '',
-//     phone_number: ''
-//   });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData((prev) => ({
-//       ...prev,
-//       [name]: value
-//     }));
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await axios.post('http://localhost:3000/user-api/register', formData);
-//       alert('Registration successful!');
-//       setFormData({
-//         roll_no: '',
-//         full_name: '',
-//         email: '',
-//         branch: '',
-//         section: '',
-//         gender: '',
-//         phone_number: ''
-//       });
-//     } catch (err) {
-//       console.error(err);
-//       alert('Failed to register user.');
-//     }
-//   };
-
-//   return (
-//     <div style={{ maxWidth: '800px', margin: 'auto', padding: '20px' }}>
-//       <div
-//         style={{
-//           backgroundColor: '#fff',
-//           boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-//           borderRadius: '10px',
-//           padding: '20px',
-//         }}
-//       >
-//         <h2
-//           style={{
-//             color: 'goldenrod',
-//             textAlign: 'center',
-//             borderBottom: '2px solid goldenrod',
-//             paddingBottom: '10px',
-//           }}
-//         >
-//           Register User
-//         </h2>
-
-//         <form onSubmit={handleSubmit}>
-//           {[
-//             { label: 'Roll No', name: 'roll_no', type: 'text' },
-//             { label: 'Full Name', name: 'full_name', type: 'text' },
-//             { label: 'Email', name: 'email', type: 'email' },
-//             { label: 'Branch', name: 'branch', type: 'text' },
-//             { label: 'Section', name: 'section', type: 'text' },
-//             { label: 'Phone Number', name: 'phone_number', type: 'tel' }
-//           ].map(({ label, name, type }) => (
-//             <div style={{ marginBottom: '15px' }} key={name}>
-//               <label htmlFor={name} style={{ fontWeight: 'bold', color: '#333' }}>
-//                 {label}
-//               </label>
-//               <input
-//                 type={type}
-//                 id={name}
-//                 name={name}
-//                 value={formData[name]}
-//                 onChange={handleChange}
-//                 placeholder={`Enter ${label.toLowerCase()}...`}
-//                 style={{
-//                   width: '100%',
-//                   padding: '10px',
-//                   border: '2px solid goldenrod',
-//                   borderRadius: '5px',
-//                   marginTop: '5px',
-//                   fontSize: '16px',
-//                 }}
-//               />
-//             </div>
-//           ))}
-
-//           <div style={{ marginBottom: '15px' }}>
-//             <label htmlFor="gender" style={{ fontWeight: 'bold', color: '#333' }}>
-//               Gender
-//             </label>
-//             <select
-//               id="gender"
-//               name="gender"
-//               value={formData.gender}
-//               onChange={handleChange}
-//               style={{
-//                 width: '100%',
-//                 padding: '10px',
-//                 border: '2px solid goldenrod',
-//                 borderRadius: '5px',
-//                 marginTop: '5px',
-//                 fontSize: '16px',
-//               }}
-//             >
-//               <option value="" disabled>
-//                 -- Select Gender --
-//               </option>
-//               <option value="Male">Male</option>
-//               <option value="Female">Female</option>
-//               <option value="Other">Other</option>
-//             </select>
-//           </div>
-
-//           <div style={{ textAlign: 'right' }}>
-//             <button
-//               type="submit"
-//               style={{
-//                 backgroundColor: 'goldenrod',
-//                 color: 'white',
-//                 fontWeight: 'bold',
-//                 padding: '10px 20px',
-//                 border: 'none',
-//                 borderRadius: '5px',
-//                 cursor: 'pointer',
-//                 fontSize: '16px',
-//                 transition: 'background 0.3s',
-//               }}
-//               onMouseOver={(e) => (e.target.style.backgroundColor = '#c38e29')}
-//               onMouseOut={(e) => (e.target.style.backgroundColor = 'goldenrod')}
-//             >
-//               Register
-//             </button>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default RegisterUser;
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -205,9 +57,52 @@ function RegisterUser() {
     }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post('http://localhost:3000/user-api/register', formData);
+  //     alert('Registration successful!');
+  //     setFormData({
+  //       event_name: '',
+  //       roll_no: '',
+  //       full_name: '',
+  //       email: '',
+  //       branch: '',
+  //       section: '',
+  //       gender: '',
+  //       phone_number: ''
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert('Failed to register user.');
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     try {
+      const response = await axios.get('http://localhost:3000/user-api/articles');
+      const events = response.data.payload || [];
+      const selectedEvent = events.find(e => e.title === formData.event_name);
+  
+      if (!selectedEvent) {
+        alert('Event not found.');
+        return;
+      }
+  
+      const alreadyRegistered = selectedEvent.registered_emails?.includes(formData.email);
+      const isPast = moment(selectedEvent.start_time).isBefore(moment());
+  
+      if (alreadyRegistered) {
+        alert('You have already registered for this event.');
+        return;
+      }
+  
+      if (isPast) {
+        alert('You cannot register for an event that has already started.');
+        return;
+      }
+  
       await axios.post('http://localhost:3000/user-api/register', formData);
       alert('Registration successful!');
       setFormData({
@@ -225,7 +120,7 @@ function RegisterUser() {
       alert('Failed to register user.');
     }
   };
-
+  
   return (
     <div style={{ maxWidth: '800px', margin: 'auto', padding: '20px' }}>
       <div
