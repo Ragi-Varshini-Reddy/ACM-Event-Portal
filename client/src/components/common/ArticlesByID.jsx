@@ -396,7 +396,35 @@ function ArticlesByID() {
     />
   </div>
 )}
-
+  <div className="form-group" style={{ marginBottom: "20px" }}>
+    <label 
+      htmlFor="participant_limit" 
+      style={{ 
+        fontWeight: "bold", 
+        fontSize: "16px", 
+        marginBottom: "8px", 
+        display: "block", 
+        color: "#333"
+      }}
+    >
+      Participant Limit
+    </label>
+    <input 
+      type="number" 
+      className="form-control" 
+      id="participant_limit" 
+      defaultValue={state.participant_limit} 
+      {...register("participant_limit")} 
+      style={{ 
+        width: "100%", 
+        padding: "10px", 
+        borderRadius: "6px", 
+        border: "1px solid #ccc", 
+        fontSize: "16px"
+      }} 
+    />
+  </div>
+  
   <div className="text-end">
     <button 
       type="submit" 

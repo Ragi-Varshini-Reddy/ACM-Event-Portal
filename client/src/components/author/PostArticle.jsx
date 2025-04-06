@@ -24,11 +24,40 @@ function PostArticle() {
       [name]: name === "ticket_price" || name === "participant_limit" ? parseInt(value) : value
     }));
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await axios.post("http://localhost:3000/author-api/article", formData);
+  //     alert("Event created successfully!");
+  //     setFormData({
+  //       title: "",
+  //       description: "",
+  //       category: "",
+  //       location: "",
+  //       start_time: "",
+  //       end_time: "",
+  //       image_url: "",
+  //       ticket_type: "free",
+  //       ticket_price: 0,
+  //       participant_limit: 0
+  //     });
+  //   } catch (err) {
+  //     console.error(err);
+  //     alert("Failed to create event.");
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3000/author-api/article", formData);
-      alert("Event created successfully!");
+      // 1. Create the event
+      const res = await axios.post("http://localhost:3000/author-api/article", formData);
+  
+      // 2. Trigger email notification
+      await axios.post("http://localhost:3000/notify-api/send-to-all", {
+        eventId: res.data._id || "New Event"
+      });
+  
+      alert("Event created and emails sent!");
       setFormData({
         title: "",
         description: "",
@@ -36,17 +65,16 @@ function PostArticle() {
         location: "",
         start_time: "",
         end_time: "",
-        image_url: "",
         ticket_type: "free",
         ticket_price: 0,
         participant_limit: 0
       });
     } catch (err) {
       console.error(err);
-      alert("Failed to create event.");
+      alert("Failed to create event or send emails.");
     }
   };
-
+  
 return (
   <div style={{ maxWidth: "800px", margin: "auto", padding: "20px" }}>
       <div

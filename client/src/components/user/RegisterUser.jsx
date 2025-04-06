@@ -92,6 +92,12 @@ function RegisterUser() {
   
       const alreadyRegistered = selectedEvent.registered_emails?.includes(formData.email);
       const isPast = moment(selectedEvent.start_time).isBefore(moment());
+      const c = selectedEvent.participant_limit - selectedEvent.participant_count;
+      
+      if( c<=0 ){
+        alert('Registeration are closed');
+        return;
+      }
   
       if (alreadyRegistered) {
         alert('You have already registered for this event.');

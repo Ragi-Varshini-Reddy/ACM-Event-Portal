@@ -7,6 +7,8 @@ const authorApp = require('./APIs/authorApi');
 const adminApp = require('./APIs/adminApi');
 const cors = require('cors')
 const checkRoleApp = require('./APIs/checkRole');
+const notifyRoutes = require('./routes/notifyRoutes');
+
 
 app.use(cors())
 
@@ -29,7 +31,7 @@ app.use('/user-api', userApp)
 app.use('/author-api', authorApp)
 app.use('/admin-api', adminApp)
 app.use('/checkRole', checkRoleApp);
-
+app.use('/notify-api', notifyRoutes);
 // Error handler middleware
 app.use((err, req, res, next) => {
     console.log("Error in express error handler: ",err)
