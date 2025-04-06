@@ -131,28 +131,16 @@ function ArticlesByID() {
                 )
               }
             </div>
-            <p className="article-content">{state.description}</p>
-            {/* <div className="comments">
-              {state.comments.length === 0 ? (
-                <p className='no-comments'>No comments yet..</p>
-              ) : (
-                state.comments.map(commentObj => (
-                  <div key={commentObj._id} className="comment-item">
-                    <p className='user-name'>{commentObj.nameOfUser}</p>
-                    <p className="comment">{commentObj.comment}</p>
-                  </div>
-                ))
-              )}
-            </div> */}
-            {/* <h5 className='comment-status mt-3'>{commentStatus}</h5>
-            {
-              currentUser.role === 'user' && (
-                <form onSubmit={handleSubmit((data) => {addComment(data); reset();})} className="comment-form">
-                  <input type="text" {...register("comment")} className="form-control w-50" />
-                  <button className='btn-submit'>Add a comment</button>
-                </form>
-              )
-            } */}
+            <div className='mt-3 article-meta flex-wrap'>
+     
+        <p className='me-5'>Category: <small>{state.category}</small></p>
+        <p className='me-5'>Location: <small>{state.location}</small></p>
+        <p className='me-5'>Ticket Type: <small>{state.ticket_type}</small></p>
+        <p className='me-5'>Ticket Price: <small>₹{state.ticket_price}</small></p>
+        <p className='me-5'>Participant Limit: <small>{state.participant_limit}</small></p>
+      </div>
+            <p className="article-content mt-3">{state.description}</p>
+            
           </>
         ) : (
 <form 

@@ -87,7 +87,7 @@ function Articles() {
         {error.length !== 0 && <p className='display-4 text-center mt-5 text-danger'>{error}</p>}
 
       {/* filter dropdown */}
-      <div className="text-end mb-3">
+      <div className="text-end mb-5">
         <select className="form-select w-auto d-inline-block" value = {selectedCategory} onChange={handleFilterChange}>
           <option value="All" disabled>Category</option>
           {categories.map((category) => (
