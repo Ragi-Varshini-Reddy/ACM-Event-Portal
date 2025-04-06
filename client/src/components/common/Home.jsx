@@ -293,7 +293,7 @@ function Home() {
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-6 d-flex justify-content-center justify-content-lg-start mb-4 mb-lg-0">
-                <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" alt="Welcome Banner" className="banner-img" />
+                <img src="https://mindlercareerlibrarynew.imgix.net/17A-Event_Management.png" alt="Welcome Banner" className="banner-img" />
               </div>
               <div className="col-lg-6 text-center text-lg-start d-flex flex-column justify-content-center">
                 <h1 className="fw-bold mb-3 text-center">Welcome to Our Community!</h1>
