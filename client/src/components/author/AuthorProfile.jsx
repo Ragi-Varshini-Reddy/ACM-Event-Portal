@@ -13,6 +13,7 @@ function AuthorProfile() {
         <li>
           <NavLink to = "article" className="nav-link">Add New Event</NavLink>
         </li>
+<li><NavLink to="calendar" className="nav-link text-decoration-none"> Calendar</NavLink></li>
         </ul>
       </nav>
       <div className="mt-5">

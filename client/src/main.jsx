@@ -88,6 +88,10 @@ const browserRouterObj = createBrowserRouter([
             element: <PostArticle/>
           },
           {
+            path: "calendar",
+            element: <CalendarPage />
+          },
+          {
             path: "",
             element: <Navigate to = "articles" />
           }
