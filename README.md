@@ -1,4 +1,4 @@
-# ACM Event Portal
+# Sanvaya - Student & Organizer Event Portal
 
 A full-stack web application for managing student events, enabling organizers to create and manage events while allowing users to register and track participation through a structured system.
 
@@ -15,7 +15,6 @@ The application provides a centralized platform to handle event workflows includ
 - Create, update, and delete events  
 - User registration for events  
 - Participation tracking  
-- REST API-based communication  
 - Responsive user interface  
 - Structured data storage using MongoDB  
 
@@ -37,7 +36,7 @@ The application provides a centralized platform to handle event workflows includ
 **Tools**
 - Git  
 - GitHub  
-- Postman  
+- REST Client  
 
 ---
 
